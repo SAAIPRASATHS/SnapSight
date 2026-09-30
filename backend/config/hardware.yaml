@@ -1,0 +1,26 @@
+hardware:
+  vendor: AUTO_DETECT
+  platform: AUTO_DETECT
+  model: AUTO_DETECT
+  preferred_backend: mock
+  fallback_backend: mock
+  camera:
+    index: 0
+    width: 1280
+    height: 720
+    fps: 30
+  inference:
+    preferred_backend: mock
+    fallback_backend: mock
+    fps: 10
+    confidence_threshold: 0.5
+    enable_cloud_apis: false
+  npu:
+    enabled: false
+    runtime: null
+    model_path: null
+  gpu:
+    enabled: false
+    cuda_visible_devices: null
+  tpu:
+    enabled: false
