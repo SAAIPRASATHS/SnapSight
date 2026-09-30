@@ -1,0 +1,52 @@
+# ============================================================
+# SnapSight AI — Hardware / Inference Configuration
+# ============================================================
+# This file describes the physical device we are running on
+# and tells the ModelProvider layer which concrete weight
+# files to load for each task.
+#
+# Changes take effect on backend restart.
+# ============================================================
+
+# ------------------------------------------------------------
+# Device Identity
+# ------------------------------------------------------------
+# `vendor` and `platform` are informational but also drive the
+# AUTO backend-selection heuristic. On Qualcomm Snapdragon HP
+# PCs leave these as-is; the AUTO resolver will pick
+# QualcommAIHubProvider by default.
+device:
+  vendor: Qualcomm
+  platform: Snapdragon
+  # AUTO_DETECT triggers runtime probing via qai-hub /
+  # onnxruntime / psutil at startup. Override to a concrete
+  # value (e.g. "Snapdragon X Elite X1E-80-100") to skip
+  # detection and shave a few hundred ms off cold start.
+  model: AUTO_DETECT
+
+# ------------------------------------------------------------
+# Inference Policy
+# ------------------------------------------------------------
+# Defaults mirror the .env keys; values here take precedence
+# over .env when both are set. Keep AUTO / CPU for maximum
+# portability across dev machines and target hardware.
+inference:
+  preferred_backend: AUTO
+  fallback_backend: CPU
+
+# ------------------------------------------------------------
+# Model Weights
+# ------------------------------------------------------------
+# Each key below MUST be a filesystem path pointing at the
+# primary weight file (or, for qai-hub packaged models, the
+# folder containing model.json + context binaries). Paths
+# are resolved relative to ./models/ in the repository root,
+# but absolute paths also work.
+#
+# Leave a value as "" to disable that AI task at runtime.
+# See docs/MODEL_SETUP.md for download + config examples.
+models:
+  object_detection: ""
+  speech_to_text: ""
+  ocr: ""
+  vision_language: ""
